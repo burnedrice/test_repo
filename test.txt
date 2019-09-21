@@ -1,1 +1,34 @@
-Y2xhc3MgU29sdXRpb246DQogICAgZGVmIGlzVmFsaWRTdWRva3Uoc2VsZiwgYm9hcmQ6IExpc3RbTGlzdFtzdHJdXSkgLT4gYm9vbDoNCiAgICAgICAgZm9yIHJvdyBpbiBib2FyZDoNCiAgICAgICAgICAgIHRhYmxlID0gc2V0KCkNCiAgICAgICAgICAgIGZvciBudW0gaW4gcm93Og0KICAgICAgICAgICAgICAgIGlmIG51bSAhPSAiLiI6DQogICAgICAgICAgICAgICAgICAgIGlmIG51bSBub3QgaW4gdGFibGU6DQogICAgICAgICAgICAgICAgICAgICAgICB0YWJsZS5hZGQobnVtKQ0KICAgICAgICAgICAgICAgICAgICBlbHNlOg0KICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIEZhbHNlDQogICAgICAgIA0KICAgICAgICBmb3IgaiBpbiByYW5nZSg5KToNCiAgICAgICAgICAgIHRhYmxlID0gc2V0KCkNCiAgICAgICAgICAgIGZvciByb3cgaW4gYm9hcmQ6DQogICAgICAgICAgICAgICAgbnVtID0gcm93W2pdDQogICAgICAgICAgICAgICAgaWYgbnVtICE9ICIuIjoNCiAgICAgICAgICAgICAgICAgICAgaWYgbnVtIG5vdCBpbiB0YWJsZToNCiAgICAgICAgICAgICAgICAgICAgICAgIHRhYmxlLmFkZChudW0pDQogICAgICAgICAgICAgICAgICAgIGVsc2U6DQogICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gRmFsc2UNCiAgICAgICAgICAgICAgICAgICAgDQogICAgICAgIGZvciBpIGluIHJhbmdlKDMpOg0KICAgICAgICAgICAgZm9yIGogaW4gcmFuZ2UoMyk6DQogICAgICAgICAgICAgICAgdGFibGUgPSBzZXQoKQ0KICAgICAgICAgICAgICAgIGZvciByIGluIHJhbmdlKGkqMywgaSozICsgMyk6DQogICAgICAgICAgICAgICAgICAgIGZvciBzIGluIHJhbmdlKGoqMywgaiozICsgMyk6DQogICAgICAgICAgICAgICAgICAgICAgICBudW0gPSBib2FyZFtyXVtzXQ0KICAgICAgICAgICAgICAgICAgICAgICAgaWYgbnVtICE9ICIuIjoNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiBudW0gbm90IGluIHRhYmxlOg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YWJsZS5hZGQobnVtKQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVsc2U6DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiBGYWxzZQ0KICAgICAgICANCiAgICAgICAgcmV0dXJuIFRydWU=
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        for row in board:
+            table = set()
+            for num in row:
+                if num != ".":
+                    if num not in table:
+                        table.add(num)
+                    else:
+                        return False
+        
+        for j in range(9):
+            table = set()
+            for row in board:
+                num = row[j]
+                if num != ".":
+                    if num not in table:
+                        table.add(num)
+                    else:
+                        return False
+                    
+        for i in range(3):
+            for j in range(3):
+                table = set()
+                for r in range(i*3, i*3 + 3):
+                    for s in range(j*3, j*3 + 3):
+                        num = board[r][s]
+                        if num != ".":
+                            if num not in table:
+                                table.add(num)
+                            else:
+                                return False
+        
+        return True
